@@ -39,12 +39,16 @@ export const login = (req, res) => {
       req.body.password,
       data[0].user_password
     );
+
     if (!isPasswordCorrect)
       return res.status(400).json('Wrong username or password!');
 
     const token = jwt.sign({ id: data[0].user_id }, 'jwtkey');
-    const { user_password, ...other } = data[0];
 
+    const { user_password, ...other } = data[0];
+    console.log(other);
+
+    // Have problem with cookies
     res
       .cookie('access_token', token, {
         httpOnly: true,
