@@ -4,6 +4,7 @@ export const addUser = (req, res) => {
   const fname = req.body.fname;
   const lname = req.body.lname;
   const email = req.body.email;
+  const image = req.body.image;
   const street = req.body.street;
   const street_nr = req.body.street_nr;
   const post_nr = req.body.post_nr;
@@ -16,11 +17,12 @@ export const addUser = (req, res) => {
   const password = req.body.password;
 
   const q =
-    'INSERT INTO users (user_fname, user_lname,  user_email, user_street, user_street_nr, user_post_nr, user_living_place, user_pid, user_birth_date, user_access_date, user_role, user_status, user_password) VALUES (?)';
+    'INSERT INTO users (user_fname, user_lname,  user_email, user_image, user_street, user_street_nr, user_post_nr, user_living_place, user_pid, user_birth_date, user_access_date, user_role, user_status, user_password) VALUES (?)';
   const values = [
     fname,
     lname,
     email,
+    image,
     street,
     street_nr,
     post_nr,
@@ -68,6 +70,7 @@ export const updateUser = (req, res) => {
   const fname = req.body.fname;
   const lname = req.body.lname;
   const email = req.body.email;
+  const image = req.body.image;
   const street = req.body.street;
   const street_nr = req.body.street_nr;
   const post_nr = req.body.post_nr;
@@ -85,6 +88,7 @@ export const updateUser = (req, res) => {
     user_fname: fname,
     user_lname: lname,
     user_email: email,
+    user_image: image,
     user_street: street,
     user_street_nr: street_nr,
     user_post_nr: post_nr,
