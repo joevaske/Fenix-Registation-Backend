@@ -4,6 +4,7 @@ export const addUser = (req, res) => {
   const fname = req.body.fname;
   const lname = req.body.lname;
   const email = req.body.email;
+  const phone = req.body.phone;
   const image = req.body.image;
   const street = req.body.street;
   const street_nr = req.body.street_nr;
@@ -13,15 +14,17 @@ export const addUser = (req, res) => {
   const birth_date = req.body.birth_date;
   const access_date = req.body.access_date;
   const role = req.body.role;
+  const rank = req.body.rank;
   const status = req.body.status;
   const password = req.body.password;
 
   const q =
-    'INSERT INTO users (user_fname, user_lname,  user_email, user_image, user_street, user_street_nr, user_post_nr, user_living_place, user_pid, user_birth_date, user_access_date, user_role, user_status, user_password) VALUES (?)';
+    'INSERT INTO users (user_fname, user_lname,  user_email, user_phone, user_image, user_street, user_street_nr, user_post_nr, user_living_place, user_pid, user_birth_date, user_access_date, user_role, user_rank, user_status, user_password) VALUES (?)';
   const values = [
     fname,
     lname,
     email,
+    phone,
     image,
     street,
     street_nr,
@@ -31,6 +34,7 @@ export const addUser = (req, res) => {
     birth_date,
     access_date,
     role,
+    rank,
     status,
     password,
   ];
@@ -70,6 +74,7 @@ export const updateUser = (req, res) => {
   const fname = req.body.fname;
   const lname = req.body.lname;
   const email = req.body.email;
+  const phone = req.body.phone;
   const image = req.body.image;
   const street = req.body.street;
   const street_nr = req.body.street_nr;
@@ -79,6 +84,7 @@ export const updateUser = (req, res) => {
   const birth_date = req.body.birth_date;
   const access_date = req.body.access_date;
   const role = req.body.role;
+  const rank = req.body.rank;
   const status = req.body.status;
   const password = req.body.password;
 
@@ -88,6 +94,7 @@ export const updateUser = (req, res) => {
     user_fname: fname,
     user_lname: lname,
     user_email: email,
+    user_phone: phone,
     user_image: image,
     user_street: street,
     user_street_nr: street_nr,
@@ -97,6 +104,7 @@ export const updateUser = (req, res) => {
     user_birth_date: birth_date,
     user_access_date: access_date,
     user_role: role,
+    user_rank: rank,
     user_status: status,
     user_password: password,
   };
