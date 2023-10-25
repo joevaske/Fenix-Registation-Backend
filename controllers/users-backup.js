@@ -1,6 +1,4 @@
 import { db } from '../db.js';
-import bcrypt from 'bcryptjs';
-import jwt from 'jsonwebtoken';
 
 export const addUser = (req, res) => {
   const fname = req.body.fname;
@@ -20,46 +18,7 @@ export const addUser = (req, res) => {
   const status = req.body.status;
   const password = req.body.password;
 
-  // CHECK EXISTING USER
-  const q = 'SELECT * from users WHERE user_email = ? OR user_fname = ?';
-
-  db.query(q, [fname, email], (err, data) => {
-    if (err) return res.json(err);
-    if (data.length) return res.status(409).json('User alredy exists');
-
-    //Hash to passwords and create users
-    const salt = bcrypt.genSaltSync(10);
-    const hash = bcrypt.hashSync(password, salt);
-
-    const q =
-      'INSERT INTO users (user_fname, user_lname,  user_email, user_phone, user_image, user_street, user_street_nr, user_post_nr, user_living_place, user_pid, user_birth_date, user_access_date, user_role, user_rank, user_status, user_password) VALUES (?)';
-
-    const values = [
-      fname,
-      lname,
-      email,
-      phone,
-      image,
-      street,
-      street_nr,
-      post_nr,
-      living_place,
-      pid,
-      birth_date,
-      access_date,
-      role,
-      rank,
-      status,
-      hash,
-    ];
-
-    db.query(q, [values], (err, data) => {
-      if (err) return res.json(err);
-      return res.status(200).send(data);
-    });
-  });
-
-  /*   const q =
+  const q =
     'INSERT INTO users (user_fname, user_lname,  user_email, user_phone, user_image, user_street, user_street_nr, user_post_nr, user_living_place, user_pid, user_birth_date, user_access_date, user_role, user_rank, user_status, user_password) VALUES (?)';
   const values = [
     fname,
@@ -85,7 +44,7 @@ export const addUser = (req, res) => {
     } else {
       res.send(result);
     }
-  }); */
+  });
 };
 export const getAllUsers = (req, res) => {
   const q = 'SELECT * FROM users ORDER BY user_id DESC';
