@@ -1,6 +1,5 @@
 import { db } from '../db.js';
 import bcrypt from 'bcryptjs';
-import jwt from 'jsonwebtoken';
 
 export const addUser = (req, res) => {
   const fname = req.body.fname;
@@ -129,6 +128,10 @@ export const updateUser = (req, res) => {
   const status = req.body.status;
   const password = req.body.password;
 
+  //Hash to passwords and create users
+  const salt = bcrypt.genSaltSync(10);
+  const hash = bcrypt.hashSync(password, salt);
+
   const q = 'UPDATE users SET ? WHERE user_id = ?';
 
   const user = {
@@ -147,7 +150,7 @@ export const updateUser = (req, res) => {
     user_role: role,
     user_rank: rank,
     user_status: status,
-    user_password: password,
+    user_password: hash,
   };
 
   db.query(q, [user, id], (err, result) => {

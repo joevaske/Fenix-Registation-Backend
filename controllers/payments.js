@@ -15,6 +15,17 @@ export const getPayment = (req, res) => {
   return res.json('form controler');
 };
 
+export const getPeymentsUser = (req, res) => {
+  const q =
+    'SELECT * FROM payments LEFT JOIN users ON payments.user_id=users.user_id ORDER BY payments.payment_id DESC';
+
+  db.query(q, (err, data) => {
+    if (err) return res.send(err);
+
+    return res.status(200).json(data);
+  });
+};
+
 export const addPayment = (req, res) => {
   const user_id = req.body.user_id;
   const staff_id = req.body.staff_id;
