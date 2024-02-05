@@ -33,10 +33,12 @@ export const addPayment = (req, res) => {
   const payment_amount = req.body.payment_amount;
   const payment_date = req.body.payment_date;
   const last_update = req.body.last_update;
+  const exp_date = req.body.exp_date;
   const month = req.body.month;
+  const note = req.body.note;
 
   const q =
-    'INSERT into payments (user_id, staff_id, payment_type, payment_amount, payment_date, last_update, month) VALUES(?)';
+    'INSERT into payments (user_id, staff_id, payment_type, payment_amount, payment_date, last_update, exp_date, month, note) VALUES(?)';
 
   const values = [
     user_id,
@@ -45,7 +47,9 @@ export const addPayment = (req, res) => {
     payment_amount,
     payment_date,
     last_update,
+    exp_date,
     month,
+    note,
   ];
   db.query(q, [values], (err, result) => {
     if (err) {
@@ -76,7 +80,9 @@ export const updatePayment = (req, res) => {
   const payment_amount = req.body.payment_amount;
   const payment_date = req.body.payment_date;
   const last_update = req.body.last_update;
+  const exp_date = req.body.exp_date;
   const month = req.body.month;
+  const note = req.body.note;
 
   const q = 'UPDATE payments SET ? WHERE payment_id = ?';
 
@@ -87,7 +93,9 @@ export const updatePayment = (req, res) => {
     payment_amount,
     payment_date,
     last_update,
+    exp_date,
     month,
+    note,
   };
   db.query(q, [payment, id], (err, result) => {
     if (err) {
