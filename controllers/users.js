@@ -57,34 +57,6 @@ export const addUser = (req, res) => {
       return res.status(200).send(data);
     });
   });
-
-  /*   const q =
-    'INSERT INTO users (user_fname, user_lname,  user_email, user_phone, user_image, user_street, user_street_nr, user_post_nr, user_living_place, user_pid, user_birth_date, user_access_date, user_role, user_rank, user_status, user_password) VALUES (?)';
-  const values = [
-    fname,
-    lname,
-    email,
-    phone,
-    image,
-    street,
-    street_nr,
-    post_nr,
-    living_place,
-    pid,
-    birth_date,
-    access_date,
-    role,
-    rank,
-    status,
-    password,
-  ];
-  db.query(q, [values], (err, result) => {
-    if (err) {
-      console.log(err);
-    } else {
-      res.send(result);
-    }
-  }); */
 };
 export const getAllUsers = (req, res) => {
   const q = 'SELECT * FROM users ORDER BY user_id DESC';
