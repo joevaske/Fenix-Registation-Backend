@@ -19,9 +19,10 @@ export const addPost = (req, res) => {
   const post_status = req.body.post_status;
   const post_type = req.body.post_type;
   const post_image = req.body.post_image;
+  const post_to = req.body.post_to;
 
   const q =
-    'INSERT into posts (post_author, post_date, post_content, post_title, post_status, post_type, post_image) VALUES(?)';
+    'INSERT into posts (post_author, post_date, post_content, post_title, post_status, post_type, post_image, post_to) VALUES(?)';
 
   const values = [
     post_author,
@@ -31,6 +32,7 @@ export const addPost = (req, res) => {
     post_status,
     post_type,
     post_image,
+    post_to,
   ];
 
   db.query(q, [values], (err, result) => {
@@ -44,13 +46,14 @@ export const addPost = (req, res) => {
 
 export const updatePost = (req, res) => {
   const id = req.body.post_id;
-  const post_author = req.body.author_id;
+  const post_author = req.body.post_author;
   const post_date = req.body.post_date;
   const post_content = req.body.post_content;
   const post_title = req.body.post_title;
   const post_status = req.body.post_status;
   const post_type = req.body.post_type;
   const post_image = req.body.post_image;
+  const post_to = req.body.post_to;
 
   const q = 'UPDATE posts SET ? WHERE post_id = ?';
 
@@ -62,6 +65,7 @@ export const updatePost = (req, res) => {
     post_status,
     post_type,
     post_image,
+    post_to,
   };
 
   db.query(q, [post, id], (err, result) => {
